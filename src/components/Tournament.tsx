@@ -29,6 +29,7 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 function getRoundLabel(size: number): string {
+  if (size >= 64) return '64강';
   if (size >= 32) return '32강';
   if (size >= 16) return '16강';
   if (size >= 8) return '8강';

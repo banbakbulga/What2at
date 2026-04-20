@@ -10,8 +10,8 @@ export type Coords = {
   lng: number;
 };
 
-export type BracketSize = 8 | 16 | 32;
-export const BRACKET_SIZES: readonly BracketSize[] = [8, 16, 32] as const;
+export type BracketSize = 8 | 16 | 32 | 64;
+export const BRACKET_SIZES: readonly BracketSize[] = [8, 16, 32, 64] as const;
 
 export type RadiusOption = 500 | 1000 | 1500 | 2000;
 export const RADIUS_OPTIONS: readonly RadiusOption[] = [500, 1000, 1500, 2000] as const;

@@ -5,7 +5,7 @@ import { DELIVERY_MENUS } from '@/config/deliveryMenus';
 import { getCategoryEmoji } from '@/lib/display';
 import type { BracketSize } from '@/hooks/useNearbyRestaurants';
 
-const SIZES: BracketSize[] = [8, 16, 32];
+const SIZES: BracketSize[] = [8, 16, 32, 64];
 
 type Props = {
   onStart: (menus: typeof DELIVERY_MENUS, size: BracketSize) => void;
