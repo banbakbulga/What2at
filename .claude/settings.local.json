@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx next:*)",
+      "Bash(curl -s http://localhost:3099)",
+      "Bash(powershell.exe:*)",
+      "Bash(curl -s http://localhost:3099/_next/static/css/app/layout.css)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(curl -s --connect-timeout 3 http://localhost:3000)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(cat .next/static/css/app/*.css)",
+      "Bash(ls -la .next/*.pid)",
+      "Bash(ls -la .next/build*)"
+    ]
+  }
+}

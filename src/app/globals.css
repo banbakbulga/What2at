@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    letter-spacing: -0.01em;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ── 애니메이션 (Roulette + Confetti에서 사용) ── */
+
+@keyframes confetti-fall {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--confetti-drift, 0px), 110vh, 0) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes roulette-tick {
+  0% {
+    transform: scale(0.82);
+    opacity: 0.3;
+  }
+  60% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes roulette-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 126, 54, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(255, 126, 54, 0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* 스크롤바 숨기기 (Webkit) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── 이모지 파도 전환 (단일 keyframe, GPU only) ── */
+
+@keyframes emoji-wave {
+  0% {
+    transform: translate3d(0, 115vh, 0);
+  }
+  28% {
+    transform: translate3d(0, 0, 0);
+  }
+  62% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, -40vh, 0);
+    opacity: 0;
+  }
+}
+
+.emoji-wave {
+  opacity: 1;
+  animation: emoji-wave 1.4s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both;
+}
