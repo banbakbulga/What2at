@@ -61,6 +61,7 @@ export const DELIVERY_MENUS: Restaurant[] = [
   menu('yangnyeom-gej', '양념게장',       '한식'),
   menu('dakgalbi',      '닭갈비',         '한식'),
   menu('bulgogi',       '불고기',         '한식'),
+  menu('jeyuk',         '제육볶음',       '한식'),
   menu('kimchi-jjim',   '김치찜',         '한식'),
   menu('dwaeji-gukbap', '돼지국밥',       '한식'),
   menu('konnamul-bap',  '콩나물국밥',      '한식'),

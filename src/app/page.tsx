@@ -23,7 +23,7 @@ import { TournamentSkeleton } from '@/components/LoadingSkeleton';
 import ThemeToggle from '@/components/ThemeToggle';
 import { getHistory, type HistoryEntry } from '@/lib/history';
 import { getCategoryEmoji } from '@/lib/display';
-import NotificationSettings from '@/components/NotificationSettings';
+import { NotificationButton } from '@/components/NotificationSettings';
 import { getNotifySettings, scheduleNotifications } from '@/lib/notifications';
 
 type AppPhase = 'intro' | 'transition' | 'main';
@@ -191,7 +191,10 @@ export default function Home() {
                   월드컵으로 오늘 한 곳을 선택해요
                 </p>
               </div>
-              <ThemeToggle />
+              <div className="flex gap-2">
+                <NotificationButton />
+                <ThemeToggle />
+              </div>
             </header>
 
             {/* 최근 결과 */}
@@ -216,13 +219,6 @@ export default function Home() {
                     </a>
                   ))}
                 </div>
-              </div>
-            )}
-
-            {/* 알림 설정 */}
-            {!mode && (
-              <div className="mb-6">
-                <NotificationSettings />
               </div>
             )}
 
