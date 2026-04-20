@@ -23,6 +23,8 @@ import { TournamentSkeleton } from '@/components/LoadingSkeleton';
 import ThemeToggle from '@/components/ThemeToggle';
 import { getHistory, type HistoryEntry } from '@/lib/history';
 import { getCategoryEmoji } from '@/lib/display';
+import NotificationSettings from '@/components/NotificationSettings';
+import { getNotifySettings, scheduleNotifications } from '@/lib/notifications';
 
 type AppPhase = 'intro' | 'transition' | 'main';
 
@@ -42,6 +44,9 @@ export default function Home() {
   useEffect(() => {
     if (!hasCompletedOnboarding()) setPhase('intro');
     setHistory(getHistory());
+    // Resume notification schedule if enabled
+    const notifySettings = getNotifySettings();
+    if (notifySettings.enabled) scheduleNotifications(notifySettings);
   }, []);
 
   const modeConfig = mode ? getModeConfig(mode) : null;
@@ -214,6 +219,13 @@ export default function Home() {
               </div>
             )}
 
+            {/* 알림 설정 */}
+            {!mode && (
+              <div className="mb-6">
+                <NotificationSettings />
+              </div>
+            )}
+
             {/* 모드 선택 (2x2 그리드) */}
             {!mode && <ModePicker onSelect={handleSelectMode} />}
 
@@ -344,6 +356,7 @@ export default function Home() {
                     restaurants={activeRestaurants.slice(0, activeSize)}
                     onReset={handleResetTournament}
                     championLabel={modeConfig.championLabel}
+                    modeId={mode}
                   />
                 )}
               </div>

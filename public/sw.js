@@ -1,4 +1,4 @@
-const CACHE_NAME = 'what2eat-v2';
+const CACHE_NAME = 'what2eat-v3';
 const PRECACHE_URLS = ['/', '/icon.svg'];
 const OFFLINE_URL = '/offline.html';
 

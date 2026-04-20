@@ -9,6 +9,7 @@ import {
   getWalkingTime,
 } from '@/lib/display';
 import { addToHistory } from '@/lib/history';
+import { shareResultCard } from '@/lib/shareCard';
 
 type Props = {
   restaurants: Restaurant[];
@@ -120,7 +121,7 @@ export default function Tournament({
 
   if (champion) {
     return (
-      <ChampionScreen champion={champion} onReset={onReset} label={championLabel} isDelivery={isDelivery} />
+      <ChampionScreen champion={champion} onReset={onReset} label={championLabel} isDelivery={isDelivery} modeId={modeId} bracketSize={restaurants.length} />
     );
   }
 
@@ -291,35 +292,43 @@ export function ChampionScreen({
   onReset,
   label,
   isDelivery = false,
+  modeId = 'lunch',
+  bracketSize = 16,
 }: {
   champion: Restaurant;
   onReset: () => void;
   label: string;
   isDelivery?: boolean;
+  modeId?: string;
+  bracketSize?: number;
 }) {
   const emoji = getCategoryEmoji(champion.category_name);
   const categoryPath = getCategoryPath(champion.category_name, champion.place_name);
   const walking = getWalkingTime(champion.distance);
+  const [shareStatus, setShareStatus] = useState<string | null>(null);
 
   useEffect(() => {
     haptic(80);
   }, []);
 
   const handleShare = async () => {
-    const text = `🏆 점심 월드컵 우승: ${champion.place_name}\n📍 ${champion.address_name}\n${champion.place_url}`;
-    try {
-      if (navigator.share) {
-        await navigator.share({ title: '점심 월드컵 결과', text, url: champion.place_url });
-        return;
-      }
-    } catch {
-      // share 취소 시 무시
+    setShareStatus('공유 준비 중...');
+    const result = await shareResultCard({ champion, modeId, bracketSize });
+    switch (result) {
+      case 'shared':
+        setShareStatus(null);
+        break;
+      case 'copied':
+        setShareStatus('클립보드에 복사됨!');
+        break;
+      case 'downloaded':
+        setShareStatus('이미지 저장됨!');
+        break;
+      default:
+        setShareStatus('공유에 실패했어요');
     }
-    try {
-      await navigator.clipboard.writeText(text);
-      alert('결과가 클립보드에 복사되었습니다!');
-    } catch {
-      // ignore
+    if (result !== 'shared') {
+      setTimeout(() => setShareStatus(null), 2500);
     }
   };
 
@@ -409,8 +418,13 @@ export function ChampionScreen({
             onClick={handleShare}
             className="flex items-center justify-center gap-1.5 rounded-2xl bg-toss-blue-light px-5 py-4 text-[16px] font-semibold text-toss-blue transition-transform active:scale-[0.97] dark:bg-toss-dark-elevated"
           >
-            📤 결과 공유하기
+            📤 결과 카드 공유하기
           </button>
+          {shareStatus && (
+            <p className="text-center text-[13px] text-toss-text-secondary dark:text-toss-dark-text-secondary">
+              {shareStatus}
+            </p>
+          )}
           <button
             onClick={onReset}
             className="rounded-2xl bg-toss-bg px-5 py-4 text-[16px] font-semibold text-toss-text transition-transform active:scale-[0.97] dark:bg-toss-dark-elevated dark:text-toss-dark-text"

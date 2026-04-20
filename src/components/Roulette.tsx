@@ -10,6 +10,7 @@ type Props = {
   restaurants: Restaurant[];
   onReset: () => void;
   championLabel?: string;
+  modeId?: string;
 };
 
 type Phase = 'spinning' | 'stopping' | 'done';
@@ -25,6 +26,7 @@ export default function Roulette({
   restaurants,
   onReset,
   championLabel = '오늘의 운명',
+  modeId = 'roulette',
 }: Props) {
   const [phase, setPhase] = useState<Phase>('spinning');
   const [displayIndex, setDisplayIndex] = useState(0);
@@ -126,7 +128,7 @@ export default function Roulette({
 
   if (phase === 'done' && winner) {
     return (
-      <ChampionScreen champion={winner} onReset={onReset} label={championLabel} />
+      <ChampionScreen champion={winner} onReset={onReset} label={championLabel} modeId={modeId} bracketSize={restaurants.length} />
     );
   }
 
