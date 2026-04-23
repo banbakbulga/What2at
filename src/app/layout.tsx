@@ -16,6 +16,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://what2at.vercel.app'),
   title: '점심 메뉴 월드컵',
   description: '주변 식당, 술집, 카페를 월드컵으로 골라요',
   applicationName: '점심월드컵',
@@ -25,11 +26,40 @@ export const metadata: Metadata = {
     statusBarStyle: 'default',
   },
   icons: {
-    icon: '/icon.svg',
-    apple: '/icon.svg',
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/web-app-manifest-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/web-app-manifest-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
+    shortcut: '/favicon.ico',
   },
   formatDetection: {
     telephone: false,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'ko_KR',
+    url: 'https://what2at.vercel.app',
+    siteName: '점심월드컵',
+    title: '점심 메뉴 월드컵',
+    description: '주변 식당, 술집, 카페를 월드컵으로 골라요',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1731,
+        height: 909,
+        alt: '점심 메뉴 월드컵',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '점심 메뉴 월드컵',
+    description: '주변 식당, 술집, 카페를 월드컵으로 골라요',
+    images: ['/og-image.png'],
   },
 };
 
