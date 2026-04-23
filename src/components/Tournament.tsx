@@ -388,21 +388,24 @@ export function ChampionScreen({
           {isDelivery ? (
             <>
               <a
-                href={`https://baemin.me/search?keyword=${encodeURIComponent(champion.place_name)}`}
+                href="https://www.baemin.com/"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center justify-center gap-1.5 rounded-2xl bg-[#2AC1BC] px-5 py-4 text-[16px] font-semibold text-white transition-transform active:scale-[0.97]"
               >
-                🐻 배달의민족에서 주문
+                🐻 배달의민족 열기
               </a>
               <a
-                href={`https://www.coupangeats.com/search?keyword=${encodeURIComponent(champion.place_name)}`}
+                href="https://www.coupangeats.com/"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center justify-center gap-1.5 rounded-2xl bg-[#0073E6] px-5 py-4 text-[16px] font-semibold text-white transition-transform active:scale-[0.97]"
               >
-                🚀 쿠팡이츠에서 주문
+                🚀 쿠팡이츠 열기
               </a>
+              <p className="text-center text-[12px] text-toss-text-tertiary dark:text-toss-dark-text-tertiary">
+                앱에서 &quot;{champion.place_name}&quot; 검색해 주세요
+              </p>
             </>
           ) : (
             <a
